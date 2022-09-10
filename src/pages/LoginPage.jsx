@@ -1,7 +1,6 @@
-import axios from "axios";
 import React, { useState } from "react";
 import Title from "../components/Title";
-//import { loginService } from "../services/authServices";
+import { loginService } from "../services/authServices";
 
 const initForm = {
   userName: "",
@@ -10,25 +9,16 @@ const initForm = {
 
 const LoginPage = () => {
   const [form, setForm] = useState(initForm);
-  //const [auth, setAuth] = useState({});
-
+  const [auth, setAuth] = useState({})
+  
   const handleForm = async (e) => {
     e.preventDefault();
-    console.log(form)
+   // console.log(form)
+    const resp = await loginService(form);
 
-    try{
-      const resp = await axios.post("https://apimongonodejs.onrender.com/api/auth/login",
-       {
-         userName: "Jacqueline",
-         password: "password"
-       })
-      console.log(resp)
-    }catch(error){
-      console.log(error.response)
-    }
-    // const data = await loginService(form);
-    // console.log(data)
-  
+    setAuth(resp.data)
+    localStorage.setItem("token", resp.token)
+    console.log(resp)
   };
 
   const cambio = (e) => {
@@ -42,7 +32,9 @@ const LoginPage = () => {
     <>
       <Title titulo="Login" />
       <section className="row">
- 
+        <article className="col">
+          <p>{auth.id}</p>
+        </article>
       </section>
       <main className="row">
         <article className="col">
