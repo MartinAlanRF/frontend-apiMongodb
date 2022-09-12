@@ -5,7 +5,8 @@ import AppRouter from './routers/AppRouter';
 import { AuthProvider } from './context/AuthContext';
 /* Se importa el Product state de manera default */
 import ProductState from './context/ProductState';
-
+/* Importando el peliculas state */
+import PeliculasState from './context/Peliculas/PeliculasState';
 /* Aquí importo el modulo de bootstrap5 */
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.min.js"
@@ -17,7 +18,9 @@ const App = () => {
         de approuter sean "hijas de authprovider que le pasa sus props a todas las demás vistas" */
     <AuthProvider>
       <ProductState>
-        <AppRouter/>
+        <PeliculasState>
+          <AppRouter/>
+        </PeliculasState>
       </ProductState>
     </AuthProvider>
   );
