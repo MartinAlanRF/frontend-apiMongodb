@@ -10,6 +10,8 @@ import NavBar from '../components/NavBar';
 /* Importando pages */
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
+import ProductPage from '../pages/ProductsPage';
+import PeliculasPage from '../pages/PeliculasPage';
 
 const AppRouter = () => {
   return (
@@ -19,6 +21,8 @@ const AppRouter = () => {
           <Routes>
               <Route path="/" element={<HomePage/>} />
               <Route path="/login" element={<LoginPage/>} />
+              <Route path='/products' element= {<ProductPage/>} />
+              <Route path='/peliculas' element= {<PeliculasPage/>} />
                   {/* El navigate se implementa para redirigir a HomePage
                   en caso de que la ruta que se le de no este dentro
                   de las rutas, es como que los mandará a esta parte */}

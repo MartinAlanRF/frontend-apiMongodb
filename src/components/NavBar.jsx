@@ -1,11 +1,15 @@
-import React from 'react'
+/* Señadio el useCOntext */
+import React, { useContext } from "react";
+/* Importo authcontext para poder pasar los valores de mi incio de sesison mediante las prop */
+import { AuthContext } from "../context/AuthContext";
 /*Importo NavLink debido a que este es el componente que 
 permite dar clic y redirigir a las demás rutas */
-
 import { NavLink } from 'react-router-dom'
 
 
+
 const NavBar = () => {
+  const { auth } = useContext(AuthContext);
   return (
     <nav className=" mx-auto navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container">
@@ -31,24 +35,78 @@ const NavBar = () => {
             </NavLink>
           </li>
 
-        </ul>
-        <ul className="navbar-nav  mb-2 mb-lg-0">
-            <li className="nav-item">
-                <NavLink
-                    to="/login"
-                    aria-current="page"
-                    className={({ isActive }) =>
+          <li className="nav-item">
+            <NavLink
+                to="/products"
+                aria-current="page"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+              PRODUCTOS
+            </NavLink>
+          </li>
+          
+          
+          <li className="nav-item">
+            <NavLink
+                to="/peliculas"
+                aria-current="page"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+              PELICULAS
+            </NavLink>
+          </li>
+
+          <li className="nav-item">
+            <NavLink
+                  to="/login"
+                  aria-current="page"
+                  className={({ isActive }) =>
                     isActive ? "nav-link active" : "nav-link"
-                    }
+                  }
                 >
-                Login
-                </NavLink>
-            </li>
-{/*             <li className="nav-item">
-              <a className="nav-link" href="/">
-                Iniciar sesión</a>
-            </li>  */}
+                LOGIN
+              </NavLink>
+          </li>
+
+
         </ul>
+        <div className="">
+            <ul className="navbar-nav mb-2 mb-lg-0">
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="/"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {auth.userName ? auth.userName : "Cuenta"}
+                </a>
+                <ul className="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Action
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Another action
+                    </a>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <button className="dropdown-item">Logout</button>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
       </div>
     </div>
   </nav>

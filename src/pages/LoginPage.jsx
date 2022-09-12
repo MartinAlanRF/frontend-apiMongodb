@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+/* Se agrego useContext para traer mi estadoglobalziado del login */
+import React, { useState, useContext } from "react";
+/* Importo el archivo useContext que se creo */
+import { AuthContext } from "../context/AuthContext";
 import Title from "../components/Title";
-import { loginService } from "../services/authServices";
+//import { loginService } from "../services/authServices";
 
 const initForm = {
   userName: "",
@@ -9,16 +12,26 @@ const initForm = {
 
 const LoginPage = () => {
   const [form, setForm] = useState(initForm);
-  const [auth, setAuth] = useState({})
-  
+ // const [auth, setAuth] = useState({})
+
+  /* Se extraer la función login de mi authProvider que esta dentro
+  del authContext y el atuh que guarda los datos del usuario */
+  const { auth, login } = useContext(AuthContext);  
   const handleForm = async (e) => {
     e.preventDefault();
    // console.log(form)
-    const resp = await loginService(form);
 
+
+/* Se impplementa el uso de la función login del authContex->AuthProvider */
+
+  const resp =  await login(form);
+    console.log(resp)
+
+/*     const resp = await loginService(form);
+    //setAuth(resp.data.data)
     setAuth(resp.data)
     localStorage.setItem("token", resp.token)
-    console.log(resp)
+    console.log(resp) */
   };
 
   const cambio = (e) => {
