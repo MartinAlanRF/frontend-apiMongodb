@@ -1,4 +1,5 @@
 import React,  {useContext} from 'react'
+
 /* Este productcontext esta por default por eso no se colocan las llaves */
 import PeliculaContext  from '../context/Peliculas/PeliculasContext';
 
@@ -16,6 +17,7 @@ const PeliculasList = () =>{
                         <h1>{pelicula.nombre}</h1>
                         <p>{pelicula.categoria}</p>
                         <p>{pelicula.precio}</p>
+
                     </li>
             ))}
             </ul>
