@@ -24,7 +24,7 @@ const AppRouter = () => {
               <Route path="/login" element={<LoginPage/>} />
               <Route path='/products' element= {<ProductsPage/>} />
               <Route path='/peliculas' element= {<PeliculasPage/>} />
-              <Route path='/products/product' element= {<ProductPage/>} />
+              <Route path='/products/:id' element= {<ProductPage/>} />
                   {/* El navigate se implementa para redirigir a HomePage
                   en caso de que la ruta que se le de no este dentro
                   de las rutas, es como que los mandará a esta parte */}

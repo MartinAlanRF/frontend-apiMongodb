@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 /* Este productcontext esta por default por eso no se colocan las llaves */
 import ProductContext from "../context/ProductContext";
 
@@ -28,15 +29,16 @@ const ProductList = () => {
         {/* Aquí se realiza el map */}
         {products.map((product) => (
           <li key={product.id}>
-            <h3>{product.id}</h3>
+            <p>{product.id}</p>
             <h2>{product.name}</h2>
             <p>{product.description}</p>
             <p>{product.price}</p>
-            <button
+            <NavLink
+               to={`/products/${product.id}`}
               className="btn btn-info" 
             >
               Ver más
-            </button>
+            </NavLink>
             <button
               className="btn btn-danger"
              onClick={()=> eliminarProducto(product.id)}

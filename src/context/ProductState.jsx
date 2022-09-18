@@ -6,16 +6,21 @@ import {
   crearProductoService,
   obtenerProductosService,
   eliminarProductoService,
+  obtenerProductoService,
+  actualizarProductoService,
 } from "../services/productServices";
 
 /* Se crea el estado inicial */
 const initialState = {
   products: [],
+  /* Se añadade otra variable de estado iniciar la cual es de tipo objeto ya que solo traera al info
+  de un solo producto */
+  product: {},
 };
 
 const ProductState = ({ children }) => {
   /* Ayuda a ejecutar un reducer/dispatch permite utilizar reducers que haya creado */
-  const [globlaState, dispatch] = useReducer(ProductReducer, initialState);
+  const [globalState, dispatch] = useReducer(ProductReducer, initialState);
 
   /* useCallback se ocupa para memorizar una función y esta no se ejecute varias veces como
     lo hace dentro del useEffect
@@ -90,21 +95,58 @@ const ProductState = ({ children }) => {
       await eliminarProductoService(id);
       /* Se ejecuta de neuvo obtener productos para cargar la lista ya con el nuevo 
       producto creado */
-        await obtenerProductos();
+      await obtenerProductos();
     } catch (error) {
       console.log(error);
     }
   };
+
+  /* Función para obtener la información de un solo producto de la lista de productos que se tiene */
+/* Se uso use callback para memorizar la función */
+
+/* Nota necesito corregir el modelo de productos desde mi backend */
+ const obtenerProducto = useCallback(async (id) =>{
+    try {
+      /* Se ejecutra la función de obtener producto en el archivo de servicios  */
+      const resp =  await obtenerProductoService(id);
+      //console.log (resp.data);
+      const producto = {
+        id: resp.data._id,
+        name: resp.data.name,
+        description: resp.data.description,
+        price: resp.data.price,
+      }
+      /* SE manda  llamar al reducer  */
+
+      dispatch(
+        {
+          type: "OBTENER_PRODUCTO",
+          payload: producto
+        }
+      )
+    } catch (error) {
+      console.log(error)
+    }  
+  },[]);
+  
+  const actualizarProducto = async (id,form) =>{
+    await actualizarProductoService(id,form);
+
+    await obtenerProducto(id)
+  }
 
   return (
     <>
       {/* <ProductContext.Provider value={{products: initialState.products, obtenerProductos}}></ProductContext.Provider> */}
       <ProductContext.Provider
         value={{
-          products: globlaState.products,
+          products: globalState.products,
           obtenerProductos,
           crearProducto,
           eliminarProducto,
+          obtenerProducto,
+          product: globalState.product,
+          actualizarProducto
         }}
       >
         {children}
