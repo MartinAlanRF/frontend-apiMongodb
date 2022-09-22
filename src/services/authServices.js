@@ -1,7 +1,16 @@
 import axios from "axios";
 
+const URLROOT = "https://apimongonodejs.onrender.com/api/auth/";
+const CONFIG = {
+  headers: {
+    "auth-token": localStorage.getItem("token"),
+  },
+};
+
+
+
 export const loginService = async (form) => {
-  const url =  "https://apimongonodejs.onrender.com/api/auth/login";
+  const url =  `${URLROOT}/login`;
   const result = await axios.post(url, form)
   //console.log(form);
 
@@ -13,4 +22,23 @@ export const loginService = async (form) => {
   usar */
   //return result;
 };
+//
+// export const signupService = async (form) => {
+//   const url =  "https://apimongonodejs.onrender.com/api/auth/";
+//   const result = await axios.post(url, form)
+//   console.log('Entro')  
+// // return result.data;
 
+// };
+
+export const signupSerivce = async (form) => {
+  const resp = await axios.post("https://apimongonodejs.onrender.com/api/auth/", form);
+
+  return resp.data;
+};
+
+export const verifyingTokenService = async () => {
+  const result = await axios.get(`${URLROOT}`, CONFIG)  
+  return result.data;
+
+};

@@ -19,7 +19,7 @@ const ProductForm = () => {
     e.preventDefault();
     /* Se manda a llamar a la función crear producto mandandole la información del form */
     await crearProducto (form);
-    console.log(form);
+    //console.log(form);
     setForm(initForm); //Actualiza la información que tendra el formulario tecnicamente 
   // en esta linea de comando limpia los campos con la variable de estado inicial del form
   };

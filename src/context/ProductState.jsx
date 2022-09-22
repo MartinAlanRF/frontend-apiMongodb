@@ -16,6 +16,7 @@ const initialState = {
   /* Se añadade otra variable de estado iniciar la cual es de tipo objeto ya que solo traera al info
   de un solo producto */
   product: {},
+  cart: [],
 };
 
 const ProductState = ({ children }) => {
@@ -41,6 +42,7 @@ const ProductState = ({ children }) => {
         name: obj.name,
         description: obj.description,
         price: obj.price,
+        cart: [],
       };
     });
     /*El dispatch sirve para disparar el reducer, ya que el reducer
@@ -129,10 +131,30 @@ const ProductState = ({ children }) => {
     }  
   },[]);
   
-  const actualizarProducto = async (id,form) =>{
-    await actualizarProductoService(id,form);
+  const actualizarProducto = async (id, form) => {
+    await actualizarProductoService(id, form);
+    await obtenerProducto(id);
+  };
 
-    await obtenerProducto(id)
+  const agregarProductoCarrito = (product) => {
+    const productoEncontrado = globalState.cart.find(
+      (producto) => product.id === producto.id
+    );
+
+    if (!productoEncontrado) {
+      //console.log(product)
+      dispatch({
+        type: "AGREGAR_PRODUCTO_CARRITO",
+        payload: product,
+      });
+    }
+  };
+
+  const eliminarProductoCarrito = (id) =>{
+    dispatch({
+      type: "ELIMINAR_PRODUCTO_CARRITO",
+      payload: id,
+    });
   }
 
   return (
@@ -146,7 +168,10 @@ const ProductState = ({ children }) => {
           eliminarProducto,
           obtenerProducto,
           product: globalState.product,
-          actualizarProducto
+          actualizarProducto,
+          agregarProductoCarrito,
+          cart: globalState.cart,
+          eliminarProductoCarrito,
         }}
       >
         {children}

@@ -12,6 +12,21 @@ const reducer = (globalState, action) => {
         ...globalState, //hace una copia de como esta mi estado
         product: action.payload,
       };
+    case "AGREGAR_PRODUCTO_CARRITO":
+      /* Se tiene que retornar un objeto */
+      return {
+        ...globalState, //hace una copia de como esta mi estado
+        cart: [...globalState.cart, action.payload]
+      };
+    
+    case "ELIMINAR_PRODUCTO_CARRITO":
+      /* Se tiene que retornar un objeto */
+    return {
+      ...globalState,
+      /* Se ocupo filter para filtrar las listas */
+      cart: globalState.cart.filter( (producto)=> producto.id !== action.payload)
+    };
+
     default:
       return globalState;
   }

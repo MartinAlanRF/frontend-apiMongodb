@@ -16,7 +16,7 @@ const ProductFormEdit = () => {
 
   const handleForm = async (e) => {
     e.preventDefault();
-   await  actualizarProducto(form.id, form)
+    actualizarProducto(form.id, form)
     //console.log(form.id, form);
   };
 

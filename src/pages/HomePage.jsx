@@ -1,4 +1,4 @@
-
+import React from 'react'
 /* Se importa el componente de titutlo */
 import Title from '../components/Title'
 

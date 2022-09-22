@@ -11,17 +11,25 @@ import PeliculasState from './context/Peliculas/PeliculasState';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.min.js"
 
+/* Importando paypal */
+import {PayPalScriptProvider} from "@paypal/react-paypal-js";
+
 /* App es el punto más alto de la aplicación */
 const App = () => {
   return (
     /* Se coloca el auth provider encima de approutes para que todas las vistas que se encuentran dentro
         de approuter sean "hijas de authprovider que le pasa sus props a todas las demás vistas" */
     <AuthProvider>
+      <PayPalScriptProvider 
+        options={{
+          "client-id": "ASmUXeo5epmRbHdEzXKG7vdtbopH8yVL8D7t0XxSKpNYmxYRotM_H4HkgnGChnBAIahJknXCGhDaYNbV",
+        }}>
       <ProductState>
         <PeliculasState>
           <AppRouter/>
         </PeliculasState>
       </ProductState>
+      </PayPalScriptProvider>
     </AuthProvider>
   );
 };

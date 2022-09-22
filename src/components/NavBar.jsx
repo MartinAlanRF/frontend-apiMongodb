@@ -62,6 +62,42 @@ const NavBar = () => {
 
           <li className="nav-item">
             <NavLink
+                to="/cart"
+                aria-current="page"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+              CARRITO
+            </NavLink>
+          </li>
+
+          <li className="nav-item">
+            <NavLink
+                to="/profile"
+                aria-current="page"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+              PERFIL
+            </NavLink>
+          </li>
+
+          <li className="nav-item">
+            <NavLink
+                to="/register"
+                aria-current="page"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+              REGISTER
+            </NavLink>
+          </li>
+
+          <li className="nav-item">
+            <NavLink
                   to="/login"
                   aria-current="page"
                   className={({ isActive }) =>

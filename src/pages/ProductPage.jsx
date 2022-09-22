@@ -7,7 +7,7 @@ import ProductFormEdit from "../components/ProductFormEdit";
 const ProductPage = () => {
   const { id } = useParams();
 
-  const {product, obtenerProducto } = useContext(ProductContext)
+  const {product, obtenerProducto, agregarProductoCarrito } = useContext(ProductContext)
 
   useEffect(() => {
     /* Nota aquí no es necesario colocar el await debido a que ya cuenta con el await 
@@ -15,6 +15,12 @@ const ProductPage = () => {
     obtenerProducto(id);
     //console.log(id);
   }, [id, obtenerProducto]);
+
+
+  const handleAgregarProductoCarrito = () => {
+    agregarProductoCarrito(product);
+    //console.log(product);
+  };
 
   return (
     <>
@@ -34,6 +40,13 @@ const ProductPage = () => {
               <h5 className="card-title">{product.name}</h5>
               <p className="card-text">{product.description}</p>
               <p className="card-text">{product.price}</p>
+              <button
+                type="button"
+                className="btn btn-primary"
+               onClick={handleAgregarProductoCarrito}
+              >
+                Agregar al carrito
+              </button>
             </div>
           </div>
         </article>
